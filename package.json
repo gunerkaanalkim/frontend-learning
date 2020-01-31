@@ -1,9 +1,18 @@
 {
   "name": "frontend-learning",
+  "scripts": {
+    "test": "jest"
+  },
   "version": "1.0.0",
   "description": "yet another frontend training repository with my own study notes and codes",
   "main": "index.js",
   "repository": "https://github.com/gunerkaanalkim/frontend-learning.git",
   "author": "g.kaanalkim@gmail.com",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "@types/jest": "^25.1.1",
+    "jest": "^25.1.0",
+    "ts-jest": "^25.1.0",
+    "typescript": "^3.7.5"
+  }
 }
