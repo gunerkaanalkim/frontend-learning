@@ -30,25 +30,37 @@ export default class LinkedList<T> {
             return {value: undefined};
         }
 
-        let currentNode = this._head;
+        let currentNode = this.getCurrentNode(setting);
 
-        while (currentNode) {
-            if (setting.callback && setting.callback(currentNode.value)) {
-                return {value: currentNode.value};
-            }
-
-            if (setting.value !== undefined && currentNode.value === setting.value) {
-                return {value: currentNode.value};
-            }
-
-            currentNode = currentNode.next;
+        if (currentNode) {
+            return {value: currentNode.value}
         }
 
         return {value: undefined}
     }
 
-    remove(index: number) {
+    remove(setting: SearchPattern<T>): { value: T } {
+        if (this.isFirstNode()) {
+            return {value: undefined}
+        }
 
+        let deletedNode: Node<T> = null;
+
+        while (this._head && this._head.value === setting.value) {
+            deletedNode = this._head;
+            this._head = this._head.next;
+        }
+
+        let currentNode = this.getCurrentNode(setting);
+
+        deletedNode = currentNode;
+        currentNode = currentNode.next;
+
+        if (this._tail.value === setting.value) {
+            this._tail = currentNode;
+        }
+
+        return {value: deletedNode.value};
     }
 
     isEmpty() {
@@ -57,6 +69,14 @@ export default class LinkedList<T> {
 
     size() {
 
+    }
+
+    get head(): Node<T> {
+        return this._head;
+    }
+
+    get tail(): Node<T> {
+        return this._tail;
     }
 
     private addFirstNode(newNode) {
@@ -68,11 +88,19 @@ export default class LinkedList<T> {
         return !this._head;
     }
 
-    get head(): Node<T> {
-        return this._head;
-    }
+    private getCurrentNode(setting): Node<T> {
+        let currentNode = this._head;
 
-    get tail(): Node<T> {
-        return this._tail;
+        while (currentNode) {
+            if (setting.callback && setting.callback(currentNode.value)) {
+                return currentNode;
+            }
+
+            if (setting.value !== undefined && currentNode.value === setting.value) {
+                return currentNode;
+            }
+
+            currentNode = currentNode.next;
+        }
     }
 }
