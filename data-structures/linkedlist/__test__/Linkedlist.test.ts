@@ -89,4 +89,14 @@ describe('LinkedList', () => {
                 }
             });
     });
+
+    it("linkedlist size", () => {
+        let myList = new LinkedList<number>();
+        myList.add(1);
+        myList.add(2);
+        myList.add(3);
+        myList.add(4);
+
+        expect(myList.size()).toBe(4);
+    });
 });
