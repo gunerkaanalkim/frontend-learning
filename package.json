@@ -1,7 +1,7 @@
 {
   "name": "frontend-learning",
   "scripts": {
-    "test": "jest"
+    "test": "jest --coverage"
   },
   "husky": {
     "hooks": {
