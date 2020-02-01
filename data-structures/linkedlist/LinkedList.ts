@@ -51,8 +51,8 @@ export default class LinkedList<T> {
 
     }
 
-    isEmpty() {
-
+    isEmpty(): boolean {
+        return this.isFirstNode();
     }
 
     size() {

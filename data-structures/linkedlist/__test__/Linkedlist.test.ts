@@ -18,7 +18,7 @@ describe('LinkedList', () => {
         myList.add(3);
 
         expect(myList.find({value: 2})).toStrictEqual({value: 2});
-    })
+    });
 
     it("find item with object type in linkedlist", () => {
         interface CountrySetting {
@@ -39,5 +39,15 @@ describe('LinkedList', () => {
                     name: "TURKEY"
                 }
             });
-    })
+    });
+
+    it("linkedlist is empty", () => {
+        let myList = new LinkedList<number>();
+
+        expect(myList.isEmpty()).toBe(true);
+
+        myList.add(1);
+
+        expect(myList.isEmpty()).toBe(false);
+    });
 });
