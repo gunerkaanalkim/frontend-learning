@@ -47,8 +47,28 @@ export default class LinkedList<T> {
         return {value: undefined}
     }
 
-    remove(index: number) {
+    remove(setting: SearchPattern<T>): { value: T } {
+        if (this.isFirstNode()) {
+            return {value: undefined}
+        }
 
+        let deletedNode: Node<T> = null;
+
+        while (this._head && this._head.value === setting.value) {
+            deletedNode = this._head;
+            this._head = this._head.next;
+        }
+
+        let currentNode = this.getCurrentNode(setting);
+
+        deletedNode = currentNode;
+        currentNode = currentNode.next;
+
+        if (this._tail.value === setting.value) {
+            this._tail = currentNode;
+        }
+
+        return {value: deletedNode.value};
     }
 
     isEmpty(): boolean {
@@ -66,6 +86,22 @@ export default class LinkedList<T> {
 
     private isFirstNode(): boolean {
         return !this._head;
+    }
+
+    private getCurrentNode(setting): Node<T> {
+        let currentNode = this._head;
+
+        while (currentNode) {
+            if (setting.callback && setting.callback(currentNode.value)) {
+                return currentNode;
+            }
+
+            if (setting.value !== undefined && currentNode.value === setting.value) {
+                return currentNode;
+            }
+
+            currentNode = currentNode.next;
+        }
     }
 
     get head(): Node<T> {
