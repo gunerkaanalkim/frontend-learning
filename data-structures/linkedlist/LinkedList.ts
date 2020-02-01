@@ -76,6 +76,3 @@ export default class LinkedList<T> {
         return this._tail;
     }
 }
-
-let list = new LinkedList<number>();
-list.add(1);
