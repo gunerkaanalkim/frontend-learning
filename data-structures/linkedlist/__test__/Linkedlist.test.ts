@@ -41,6 +41,16 @@ describe('LinkedList', () => {
             });
     });
 
+    it("linkedlist is empty", () => {
+        let myList = new LinkedList<number>();
+
+        expect(myList.isEmpty()).toBe(true);
+
+        myList.add(1);
+
+        expect(myList.isEmpty()).toBe(false);
+    });
+
     it("remove item with primitive type from linkedlist", () => {
         let myList = new LinkedList<number>();
         myList.add(1);

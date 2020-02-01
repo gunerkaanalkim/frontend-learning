@@ -71,8 +71,8 @@ export default class LinkedList<T> {
         return {value: deletedNode.value};
     }
 
-    isEmpty() {
-
+    isEmpty(): boolean {
+        return this.isFirstNode();
     }
 
     size() {
