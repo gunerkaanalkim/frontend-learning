@@ -8,6 +8,7 @@ interface SearchPattern<T> {
 export default class LinkedList<T> {
     private _head: Node<T> = undefined;
     private _tail: Node<T> = undefined;
+    private _size: number = 0;
 
     add(value: T): LinkedList<T> {
         const newNode = new Node<T>();
@@ -15,12 +16,14 @@ export default class LinkedList<T> {
 
         if (this.isFirstNode()) {
             this.addFirstNode(newNode);
-
+            this.increaseSize();
             return this;
         }
 
         this._tail.next = newNode;
         this._tail = newNode;
+
+        this.increaseSize();
 
         return this;
     }
@@ -75,8 +78,8 @@ export default class LinkedList<T> {
         return this.isFirstNode();
     }
 
-    size() {
-
+    size(): number {
+        return this._size
     }
 
     private addFirstNode(newNode) {
@@ -102,6 +105,14 @@ export default class LinkedList<T> {
 
             currentNode = currentNode.next;
         }
+    }
+
+    private increaseSize(): void {
+        this._size++;
+    }
+
+    private decreaseSize(): void {
+        this._size--;
     }
 
     get head(): Node<T> {
